@@ -1,7 +1,8 @@
 # Quickstart and Validation Guide
 
 **Status**: Application implemented and running locally. Automated and browser checks
-have passed; the real five-user walkthrough and dependent final acceptance remain pending.
+were rerun on 2026-11-08; the real five-user walkthrough and dependent final acceptance
+remain pending.
 
 ## Verified Results (2026-11-03)
 
@@ -33,10 +34,34 @@ have passed; the real five-user walkthrough and dependent final acceptance remai
    storage responsibilities, shared exact formatting, parameterized SQL, escaped templates,
    safe error logging, and documented run/test commands.
 - No extension hooks are configured. No commits or branches were created.
+- **Retest on 2026-11-08**: The full unittest suite passed all 32 tests. README system-Python
+   instructions and referenced paths were checked. The isolated 100-meal Flask test-client
+   run measured 19.68 ms cold, then 4.89, 5.03, 5.12, and 4.74 ms warm on Windows 11 AMD64,
+   Python 3.13.0. No personal database records were used or changed by this smoke test.
 
 **Remaining gate**: T043 requires five real first-time participants, with at least four
 successful unassisted completions of the specified task. This has not been performed;
-browser automation is not a substitute. T046 final acceptance remains pending that gate.
+browser automation is not a substitute. Use the result sheet below; T046 final acceptance
+remains pending until those actual results are recorded.
+
+### T043 First-Time User Walkthrough Result Sheet
+
+For each participant, provide only a meal entry and the selected date. Do not demonstrate
+the interface or explain how to read the totals. Ask them to add one meal, then identify
+the displayed calorie and protein totals. Record completion and elapsed time; do not enter
+names or other personal information.
+
+| Participant | Added meal without help? | Identified calorie total? | Identified protein total? | Completed both? | Time |
+|-------------|--------------------------|---------------------------|---------------------------|-----------------|------|
+| 1 | Pending | Pending | Pending | Pending | Pending |
+| 2 | Pending | Pending | Pending | Pending | Pending |
+| 3 | Pending | Pending | Pending | Pending | Pending |
+| 4 | Pending | Pending | Pending | Pending | Pending |
+| 5 | Pending | Pending | Pending | Pending | Pending |
+
+**Pass threshold**: At least 4 of 5 participants complete the meal-entry task and correctly
+identify both totals without assistance. Record the observed count and any task failures;
+do not replace participants with automated browser runs.
 
 ## Prerequisites
 
