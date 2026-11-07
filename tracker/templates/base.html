@@ -1,0 +1,23 @@
+<!doctype html>
+{% macro icon(name) -%}<svg class="icon" aria-hidden="true"><use href="{{ url_for('static', filename='vendor/bootstrap-icons.svg') }}#{{ name }}"></use></svg>{%- endmacro %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Calorie &amp; Nutrition Tracker{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="topbar"><div class="container app-width topbar-inner">
+    <a class="brand" href="/"><span class="brand-icon">{{ icon('egg-fried') }}</span>Daily<span>Table</span><small>CALORIE &amp; NUTRITION TRACKER</small></a>
+    <span class="brand-note">A little more balance.</span>
+  </div></header>
+  <main id="content" class="container app-width" tabindex="-1">
+    {% for message in get_flashed_messages() %}<div class="alert alert-success" role="status">{{ message }}</div>{% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container app-width footer">DailyTable <span>Calories &amp; protein. One day at a time.</span></footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+@font-face { font-family:Manrope; font-style:normal; font-weight:400; font-display:swap; src:url('vendor/manrope-regular.woff2') format('woff2'); }
+@font-face { font-family:Manrope; font-style:normal; font-weight:600 800; font-display:swap; src:url('vendor/manrope-bold.woff2') format('woff2'); }
+:root { --ink:#173d32; --green:#237553; --mint:#eaf3ed; --orange:#b44d29; --line:#dce4df; --paper:#f8faf8; }
+* { box-sizing:border-box; letter-spacing:0; }
+body { background:var(--paper); color:#243b32; font-family:Manrope,Verdana,sans-serif; margin:0; background-image:linear-gradient(180deg,#f1f6f2 0,transparent 380px); }
+h1,h2,h3,.brand { font-family:Manrope,Verdana,sans-serif; }
+a { color:var(--green); }
+.app-width { max-width:1100px; }
+.topbar { background:#fff; border-bottom:1px solid var(--line); }
+.topbar-inner { display:flex; align-items:center; justify-content:space-between; min-height:104px; gap:20px; }
+.brand { color:var(--ink); text-decoration:none; font-weight:800; font-size:27px; line-height:1.2; }
+.brand span { color:var(--green); }
+.brand small { display:block; font-size:9px; margin-top:7px; color:#657a70; }
+.brand-note { font-size:13px; color:#64786c; }
+main { min-height:70vh; padding-top:34px; }
+.page-section { padding:18px 0 32px; }
+.narrow { max-width:680px; margin:auto; }
+h1 { font-size:30px; font-weight:800; margin:0 0 8px; overflow-wrap:anywhere; }
+h2 { font-size:20px; font-weight:700; }
+.eyebrow { font-size:11px; font-weight:700; color:#657a70; margin:0 0 12px; }
+.footer { border-top:1px solid var(--line); margin-top:40px; padding-top:22px; padding-bottom:25px; font-weight:700; font-size:12px; display:flex; justify-content:space-between; gap:12px; }
+.footer span { color:#718176; font-weight:400; }
+.btn { border-radius:5px; font-weight:600; padding:10px 16px; }
+.btn-dark { background:var(--ink); border-color:var(--ink); }
+.btn-outline-dark { color:var(--ink); border-color:#c9d6ce; }
+.form-control,.form-select { border-color:#cbd8cf; border-radius:5px; min-height:46px; }
+.form-label { font-weight:600; font-size:14px; }
+:focus-visible { outline:3px solid #e6a748!important; outline-offset:3px; }
+.skip-link { position:absolute; top:-80px; left:15px; background:white; padding:12px; z-index:20; }
+.skip-link:focus { top:10px; }
+.alert { border-radius:5px; }
+.diary-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.subtle { color:#6b7b71; font-size:14px; }
+.date-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:20px 0 32px; }
+.date-toolbar .form-control { width:175px; }
+.section-heading { display:flex; align-items:center; justify-content:space-between; padding-bottom:16px; border-bottom:1px solid var(--line); }
+.section-heading h2 { margin:0; }
+.meal-row { display:grid; grid-template-columns:minmax(0,1fr) 100px 100px 140px; gap:22px; align-items:center; border-bottom:1px solid var(--line); padding:22px 0; }
+.meal-label h3 { font-size:16px; margin:6px 0 0; font-weight:700; overflow-wrap:anywhere; }
+.category { color:var(--green); font-size:11px; font-weight:700; }
+.meal-amount strong { display:block; font-size:18px; overflow-wrap:anywhere; }
+.meal-amount span { font-size:11px; color:#718176; }
+.meal-actions { display:flex; gap:8px; align-items:center; }
+.meal-actions .btn { padding:7px 10px; }
+.empty-state { text-align:center; padding:45px 10px; }
+.empty-mark { background:var(--mint); border-radius:50%; display:grid; place-items:center; width:48px; height:48px; color:var(--green); font-size:28px; margin:0 auto 15px; }
+.empty-state h3 { font-size:18px; font-weight:700; }
+.entry-form { background:white; padding:26px; border:1px solid var(--line); border-radius:6px; }
+.back-link { font-size:13px; }
+.nutrition-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; padding:0 0 34px; }
+.nutrition-summary { background:#e9f2ec; padding:24px; border-top:3px solid #2c7956; }
+.nutrition-summary.protein { background:#f7ede7; border-top-color:#b65d34; }
+.nutrition-summary h2 { font-size:14px; }
+.intake { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; margin:16px 0; }
+.intake strong { font-family:Manrope,Verdana,sans-serif; font-size:34px; line-height:1.2; overflow-wrap:anywhere; max-width:100%; }
+.intake span { font-size:13px; color:#61776b; }
+progress { display:block; appearance:none; border:0; width:100%; height:7px; border-radius:3px; background:#d3dfd6; accent-color:var(--green); overflow:hidden; }
+progress::-webkit-progress-bar { background:#d3dfd6; }
+progress::-webkit-progress-value { background:var(--green); }
+progress::-moz-progress-bar { background:var(--green); }
+.protein progress { accent-color:var(--orange); }
+.protein progress::-webkit-progress-value { background:var(--orange); }
+.protein progress::-moz-progress-bar { background:var(--orange); }
+.progress-status { margin:13px 0 0; font-size:12px; font-weight:600; }
+.progress-status.exceeded { color:#943e20; }
+.target-link { font-size:13px; }
+.target-actions { text-align:right; font-size:12px; margin:-18px 0 30px; }
+.icon { width:18px; height:18px; fill:currentColor; flex-shrink:0; vertical-align:-3px; }
+.btn .icon { margin-right:4px; }
+.icon-button { display:inline-grid; place-items:center; width:36px; height:36px; padding:0!important; }
+.icon-button .icon { margin:0; width:16px; height:16px; }
+.brand-icon { display:inline-grid; place-items:center; background:var(--green); color:white; width:36px; height:36px; border-radius:6px; margin-right:9px; vertical-align:3px; }
+.brand .brand-icon { color:white; }
+.brand small { padding-left:48px; }
+.meal-actions { justify-content:flex-end; }
+main { animation:arrive .3s ease-out; }
+@keyframes arrive { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) { main { animation:none; } }
+@media(max-width:600px) { .brand-note { display:none; } .topbar-inner { min-height:88px; } main { padding-top:20px; } h1 { font-size:26px; } .footer { flex-direction:column; } }
+@media(max-width:600px) { .meal-row { grid-template-columns:1fr 1fr; gap:12px; } .meal-label { grid-column:1/-1; } .meal-actions { grid-column:1/-1; } .entry-form { padding:18px; } .diary-heading .btn { padding:10px 12px; } }
+@media(max-width:600px) { .nutrition-grid { gap:14px; } .nutrition-summary { padding:17px; } .intake strong { font-size:26px; } }
+@media(max-width:359px) { .nutrition-grid { grid-template-columns:1fr; } }

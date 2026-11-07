@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Daily targets | DailyTable{% endblock %}
+{% block content %}
+<section class="page-section narrow">
+  <a class="back-link" href="{{ url_for('main.dashboard', date=fields['return_date']) }}">Back to diary</a>
+  <p class="eyebrow mt-4">YOUR DAILY GOALS</p>
+  <h1>Nutrition targets</h1>
+  <form method="post" class="entry-form mt-4" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="submission_key" value="{{ fields['submission_key'] }}">
+    <input type="hidden" name="return_date" value="{{ fields['return_date'] }}">
+    {% if errors or message %}<div class="alert alert-danger" role="alert" tabindex="-1" id="form-errors" autofocus>
+      {{ message or 'Please correct the marked fields.' }}
+      {% if errors %}<ul class="mb-0">{% for field,error in errors.items() %}<li>{{ error }}</li>{% endfor %}</ul>{% endif %}
+    </div>{% endif %}
+    <div class="row g-4">
+    {% for field,label,unit in [('calorie_target','Daily calories','kcal'),('protein_target','Daily protein','g')] %}
+      <div class="col-sm-6">
+        <label for="{{ field }}" class="form-label">{{ label }} ({{ unit }})</label>
+        <input type="text" inputmode="decimal" id="{{ field }}" name="{{ field }}" class="form-control {{ 'is-invalid' if field in errors }}" value="{{ fields.get(field,'') }}" required {% if field in errors %}aria-invalid="true" aria-describedby="error-{{ field }}"{% endif %}>
+        {% if field in errors %}<div id="error-{{ field }}" class="invalid-feedback">{{ errors[field] }}</div>{% endif %}
+      </div>
+    {% endfor %}
+    </div>
+    <div class="d-flex gap-2 mt-4"><button class="btn btn-dark" type="submit">Save targets</button><a class="btn btn-outline-dark" href="{{ url_for('main.dashboard', date=fields['return_date']) }}">Cancel</a></div>
+  </form>
+</section>
+{% endblock %}

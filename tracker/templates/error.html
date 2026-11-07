@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | DailyTable{% endblock %}
+{% block content %}
+<section class="page-section narrow">
+  <p class="eyebrow">LET'S TRY THAT AGAIN</p>
+  <h1>{{ title }}</h1>
+  <p role="alert">{{ message }}</p>
+  {% if retry_fields %}<form method="post" action="{{ retry_action }}" class="d-inline">
+    {% for name,value in retry_fields.items() %}<input type="hidden" name="{{ name }}" value="{{ value }}">{% endfor %}
+    <button class="btn btn-dark" type="submit">Retry deletion</button>
+  </form>{% else %}<a href="{{ request.full_path }}" class="btn btn-dark">Retry</a>{% endif %}
+  <a href="/" class="btn btn-outline-dark">Back to diary</a>
+</section>
+{% endblock %}

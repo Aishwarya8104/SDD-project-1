@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-section">
+  <div class="diary-heading">
+    <div><p class="eyebrow">YOUR DAILY CHECK-IN</p><h1>Food diary</h1><p class="subtle">{{ day }}</p></div>
+    <a class="btn btn-dark" href="{{ url_for('main.meal_form', date=day) }}">{{ icon('plus-lg') }} Add meal</a>
+  </div>
+  <form action="/" method="get" class="date-toolbar">
+    <label for="date" class="form-label mb-0">Viewing</label>
+    <input type="date" id="date" name="date" value="{{ day }}" class="form-control" required>
+    <button class="btn btn-outline-dark" type="submit">View day</button>
+  </form>
+  <div class="nutrition-grid">
+    {% for nutrient,label,unit in [('calories','Calories','kcal'),('protein','Protein','g')] %}
+    <section class="nutrition-summary {{ nutrient }}">
+      <h2>{{ icon('fire' if nutrient == 'calories' else 'activity') }} {{ label }}</h2>
+      {% set state = states[nutrient] %}
+      <div class="intake"><strong id="total-{{ nutrient }}">{{ totals[nutrient]|amount }}</strong><span>{{ unit }}{% if state.target is not none %} / {{ state.target|amount }} {{ unit }}{% endif %}</span></div>
+      {% if state.target is not none %}
+        <progress value="{{ state.fill }}" max="100" aria-label="{{ label }} daily progress">{{ state.fill }}%</progress>
+        <p class="progress-status {{ state.status }}">
+          {% if state.status == 'below' %}{{ state.remaining|amount }} {{ unit }} remaining{% elif state.status == 'reached' %}Target reached{% else %}{{ state.exceeded|amount }} {{ unit }} over target{% endif %}
+        </p>
+      {% else %}<a class="target-link" href="{{ url_for('main.targets', date=day) }}">Set a target</a>{% endif %}
+    </section>
+    {% endfor %}
+  </div>
+  <div class="target-actions"><a href="{{ url_for('main.targets', date=day) }}">Edit daily targets</a></div>
+  <div class="section-heading"><h2>Meals</h2><span class="subtle">{{ meals|length }} recorded</span></div>
+  {% if meals %}
+  <div class="meal-list">
+    {% for meal in meals %}
+    <article class="meal-row">
+      <div class="meal-label"><span class="category">{{ meal.category }}</span><h3>{{ meal.food_name }}</h3></div>
+      <div class="meal-amount"><strong>{{ meal.calories_hundredths|amount }}</strong><span>kcal</span></div>
+      <div class="meal-amount"><strong>{{ meal.protein_hundredths|amount }}</strong><span>g protein</span></div>
+      <div class="meal-actions">
+        <a class="btn btn-outline-dark icon-button" href="{{ url_for('main.meal_form', meal_id=meal.id) }}" aria-label="Edit {{ meal.food_name }}" title="Edit meal">{{ icon('pencil') }}</a>
+        <form method="post" action="{{ url_for('main.remove_meal', meal_id=meal.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="submission_key" value="{{ new_submission() }}">
+          <input type="hidden" name="return_date" value="{{ day }}">
+          <button class="btn btn-outline-danger icon-button" aria-label="Delete {{ meal.food_name }}" title="Delete meal" type="submit">{{ icon('trash3') }}</button>
+        </form>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><span class="empty-mark" aria-hidden="true">{{ icon('egg-fried') }}</span><h3>No meals recorded</h3><p class="subtle">Nothing on the table for this day.</p><a class="btn btn-dark" href="{{ url_for('main.meal_form', date=day) }}">{{ icon('plus-lg') }} Add a meal</a></div>
+  {% endif %}
+</section>
+{% endblock %}
